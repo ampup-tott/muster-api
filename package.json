@@ -1,0 +1,40 @@
+{
+  "name": "muster-api",
+  "description": "This is api for muster app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ampup-tott/muster-api",
+  "author": "Abel Tran",
+  "scripts": {
+    "start": "yarn build && node app",
+    "build": "babel src -d build"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "stage-1"
+    ]
+  },
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "finalhandler": "^1.1.2",
+    "moment": "^2.24.0",
+    "querystring": "^0.2.0",
+    "router": "^1.3.4",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-1": "^6.24.1"
+  }
+}
