@@ -15,7 +15,7 @@ const ensureAdmin = async (req, res, next) => {
   if (!req.user_token) {
     return next(new Error('Forbidden 1'));
   }
-  if (req.user_token.role !== 'admin') {
+  if (!req.user_token.is_super_user) {
     return next(new Error('Forbidden 2'));
   }
 
