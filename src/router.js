@@ -34,4 +34,22 @@ app.post('/import-students', ensureLogged, require('./lambda/import-students'));
 app.get('/get-class', ensureLogged, require('./lambda/get-class'));
 app.get('/get-classes', ensureLogged, require('./lambda/get-classes'));
 
+app.use(async (err, req, res, next) => {
+  let error_code = err && err.message == 'Token is invalid' ? 4001 : undefined;
+
+  if (!res.statusCode || res.statusCode === 200) {
+    res.statusCode = 400;
+  }
+  if (error_code == 4001) {
+    res.statusCode = 401;
+  }
+
+  let data = {
+    status: 'FAIL',
+    reason: err.message ? err.message : err.toString(),
+    error_code
+  };
+  res.json(data);
+});
+
 module.exports = app;
