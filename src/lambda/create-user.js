@@ -54,10 +54,16 @@ module.exports = async (req, res, next) => {
     return next('Missing parameter: password');
   }
 
+  const user = await Teacher.findOne({ email });
+
+  if (user) {
+    return next('Account is exist');
+  }
+
   const salt = crypto.randomBytes(16).toString('hex');
   const hash = crypto.pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex');
 
-  await Teacher.insertMany([{
+  let teacher = new Teacher({
     first_name,
     last_name,
     name,
@@ -68,8 +74,10 @@ module.exports = async (req, res, next) => {
     major,
     salt,
     hash,
-    created_at: moment.unix()
-  }])
+    created_at: moment().unix()
+  })
+
+await teacher.save();
 
   return res.json({
     status: 'OK'
