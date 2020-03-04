@@ -10,7 +10,22 @@ require('../mongoosefile');
 app.use(body.json({ limit: '50mb' }));
 app.use(require('./mid/query'));
 app.use(require('./mid/json'));
+app.use(passport.initialize());
 app.use(cors());
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With, Content-Type, Authorization'
+  );
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 const ensureLogged = passport.authenticate('jwt', { session: false });
 
@@ -21,13 +36,12 @@ const ensureAdmin = async (req, res, next) => {
   if (!req.user_token.is_super_user) {
     return next(new Error('Forbidden 2'));
   }
-
   next();
 };
 
 app.get('/', require('./lambda/status'));
 
-app.post('/create-user', ensureAdmin, ensureLogged, require('./lambda/create-user'));
+app.post('/create-user', ensureLogged, ensureAdmin,  require('./lambda/create-user'));
 
 app.post('/login', require('./lambda/login'));
 app.post('/import-students', ensureLogged, require('./lambda/import-students'));
