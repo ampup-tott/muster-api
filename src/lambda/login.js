@@ -31,9 +31,10 @@ module.exports = async (req, res, next) => {
     return next('Wrong username or password');
   }
 
-  let token =  jwt.sign(
+  let token = jwt.sign(
     {
-      user_id: teacher.email
+      user_id: teacher.email,
+      is_super_user: teacher.is_super_user
     },
     process.env.SECRET
   );
@@ -52,7 +53,7 @@ module.exports = async (req, res, next) => {
       address: teacher.address,
       phone: teacher.phone,
       major: teacher.major,
-      token: token,
+      token,
       hash: teacher.hash,
       salt: teacher.salt,
       created_at: teacher.created_at,
