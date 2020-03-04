@@ -15,10 +15,11 @@ const schema = new mongoose.Schema({
   hash: { type: String, trim: true },
   salt: { type: String, trim: true },
   token: { type: String, trim: true },
-  create_at: { type: Number },
+  created_at: { type: Number },
   updated_at: { type: Number },
   last_login: { type: Number },
-  is_super_admin: { type: Boolean, default: false }
+  is_super_user: { type: Boolean, default: false },
+  status: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model('Teacher', schema, 'teacher');
