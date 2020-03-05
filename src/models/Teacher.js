@@ -3,7 +3,6 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  id: { type: Number, auto: true, unique: true },
   first_name: { type: String, trim: true },
   last_name: { type: String, trim: true },
   name: { type: String, trim: true },
