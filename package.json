@@ -6,7 +6,7 @@
   "repository": "https://github.com/ampup-tott/muster-api",
   "author": "Abel Tran",
   "scripts": {
-    "start": "yarn build && node app",
+    "start": "node app",
     "build": "babel src -d build"
   },
   "babel": {
