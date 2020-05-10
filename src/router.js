@@ -47,6 +47,7 @@ app.post('/login', require('./lambda/login'));
 app.post('/import-students', ensureLogged, require('./lambda/import-students'));
 app.get('/get-class', ensureLogged, require('./lambda/get-class'));
 app.get('/get-classes', ensureLogged, require('./lambda/get-classes'));
+app.get('/profile', ensureLogged, require('./lambda/get-profile'));
 
 app.use(async (err, req, res, next) => {
   let error_code = err && err.message == 'Token is invalid' ? 4001 : undefined;
