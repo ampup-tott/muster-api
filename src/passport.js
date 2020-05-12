@@ -24,6 +24,8 @@ passport.use(new JwtStrategy(
       is_super_user: user.is_super_user
     }
 
+    console.log(user_token);
+
     if (req.url.endsWith('logout')) {
       req.user_token = user_token;
       return next(null, payload);
