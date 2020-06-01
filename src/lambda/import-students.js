@@ -28,6 +28,8 @@ module.exports = async (req, res, next) => {
     return next('Wrong parameter!');
   }
 
+  await Student.insertMany(students);
+
   return res.json({
     status: 'OK',
   });
