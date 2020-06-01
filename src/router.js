@@ -14,8 +14,6 @@ app.use(passport.initialize());
 app.use(cors());
 
 app.use((req, res, next) => {
-
-  console.log(req.headers);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Methods',
@@ -43,7 +41,12 @@ const ensureAdmin = async (req, res, next) => {
 
 app.get('/', require('./lambda/status'));
 
-app.post('/create-user', ensureLogged, ensureAdmin,  require('./lambda/create-user'));
+app.post(
+  '/create-user',
+  ensureLogged,
+  ensureAdmin,
+  require('./lambda/create-user')
+);
 
 app.post('/login', require('./lambda/login'));
 app.post('/import-students', ensureLogged, require('./lambda/import-students'));
@@ -52,7 +55,12 @@ app.get('/get-classes', ensureLogged, require('./lambda/get-classes'));
 app.get('/profile', ensureLogged, require('./lambda/get-profile'));
 
 // subject
-app.post('/subject', ensureLogged, ensureAdmin,require('./lambda/subject/add-subject'));
+app.post(
+  '/subject',
+  ensureLogged,
+  ensureAdmin,
+  require('./lambda/subject/add-subject')
+);
 app.get('/subjects', ensureLogged, require('./lambda/subject/get-subjects'));
 
 app.use(async (err, req, res, next) => {
@@ -68,7 +76,7 @@ app.use(async (err, req, res, next) => {
   let data = {
     status: 'FAIL',
     reason: err.message ? err.message : err.toString(),
-    error_code
+    error_code,
   };
   res.json(data);
 });

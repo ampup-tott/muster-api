@@ -7,37 +7,36 @@ import Teacher from './models/Teacher';
 const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 
-passport.use(new JwtStrategy(
-  {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.SECRET,
-    passReqToCallback: true
-  },
-  async (req, payload, next) => {
-    const user = await Teacher.findOne({
-      email: payload.user_id,
-      status: true
-    })
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.SECRET,
+      passReqToCallback: true,
+    },
+    async (req, payload, next) => {
+      const user = await Teacher.findOne({
+        email: payload.user_id,
+        status: true,
+      });
 
-    let user_token = {
-      email: user.email,
-      is_super_user: user.is_super_user
-    }
+      let user_token = {
+        email: user.email,
+        is_super_user: user.is_super_user,
+      };
 
-    console.log(user_token);
-
-    if (req.url.endsWith('logout')) {
-      req.user_token = user_token;
-      return next(null, payload);
-    }
-    else {
-      if (!user_token) {
-        return next(new Error('Token is invalid'));
+      if (req.url.endsWith('logout')) {
+        req.user_token = user_token;
+        return next(null, payload);
+      } else {
+        if (!user_token) {
+          return next(new Error('Token is invalid'));
+        }
+        req.user_token = user_token;
+        return next(null, user_token);
       }
-      req.user_token = user_token;
-      return next(null, user_token);
     }
-  }
-));
+  )
+);
 
 module.exports = passport;
