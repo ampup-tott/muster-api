@@ -11,7 +11,6 @@ const schema = new mongoose.Schema({
   address: { type: String, trim: true },
   phone: { type: String, trim: true },
   major: { type: String, trim: true },
-  subjects: { type: Array, default: [] }
 });
 
 module.exports = mongoose.model('Student', schema, 'student');
