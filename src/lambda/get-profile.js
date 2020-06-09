@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
     data: {
       email: user.email,
       name: user.name,
-      birthday: moment(user.birthday * 1000).format('DD/MM/YYYY'),
+      birthday: user.birthday,
       address: user.address,
       phone: user.phone,
       role: user.is_superuser ? 'admin' : 'user'
