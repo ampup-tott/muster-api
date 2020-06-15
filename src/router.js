@@ -51,8 +51,13 @@ app.post(
 app.post('/login', require('./lambda/login'));
 app.post('/import-students', ensureLogged, require('./lambda/import-students'));
 app.get('/get-class', ensureLogged, require('./lambda/get-class'));
-app.get('/get-classes', ensureLogged, require('./lambda/get-classes'));
+app.get('/get-classes', ensureLogged, require('./lambda/class/get-classes'));
 app.get('/profile', ensureLogged, require('./lambda/get-profile'));
+
+// Apis for Mobile
+app.get('/subjects', ensureLogged, require('./lambda/subject/get-subjects'));
+app.get('/subjects/:subject_id/classes', require('./lambda/class/get-classes'));
+app.get('/students/:id', require('./lambda/get-student'));
 
 // subject
 app.post(

@@ -15,14 +15,10 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, payload, next) => {
-      const user = await Teacher.findOne({
-        email: payload.user_id,
-        status: true,
-      });
-
       let user_token = {
-        email: user.email,
-        is_super_user: user.is_super_user,
+        email: payload.email,
+        id: payload._id,
+        is_super_user: payload.is_super_user,
       };
 
       if (req.url.endsWith('logout')) {
