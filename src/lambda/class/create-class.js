@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
     return next("Missing parameter: teacher_id");
   }
 
-  if (!student_ids && (student_ids || !student_ids.length)) {
+  if (!student_ids || (student_ids && !student_ids.length)) {
     return next("Missing or wrong parameter: student_ids");
   }
 

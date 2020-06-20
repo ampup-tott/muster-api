@@ -57,6 +57,9 @@ app.get('/all-subjects', ensureLogged, ensureAdmin, require('./lambda/subject/ge
 app.get('/all-students', ensureLogged, require('./lambda/get-all-students'));
 app.get('/all-teachers', ensureLogged, require('./lambda/get-all-users'));
 
+// class
+app.post('/class', ensureLogged, require('./lambda/class/create-class'));
+
 // Apis for Mobile
 app.get('/subjects', ensureLogged, require('./lambda/subject/get-subjects'));
 app.get('/subjects/:subject_id/classes', require('./lambda/class/get-classes'));
