@@ -17,20 +17,16 @@ passport.use(
     async (req, payload, next) => {
       let user_token = {
         email: payload.email,
-        id: payload._id,
+        id: payload.id,
         is_super_user: payload.is_super_user,
       };
 
-      if (req.url.endsWith('logout')) {
-        req.user_token = user_token;
-        return next(null, payload);
-      } else {
-        if (!user_token) {
-          return next(new Error('Token is invalid'));
-        }
-        req.user_token = user_token;
-        return next(null, user_token);
+      if (!user_token) {
+        return next(new Error('Token is invalid'));
       }
+
+      req.user_token = user_token;
+      return next(null, user_token);
     }
   )
 );

@@ -33,7 +33,7 @@ module.exports = async (req, res, next) => {
 
   let token = jwt.sign(
     {
-      user_id: teacher.email,
+      email: teacher.email,
       id: teacher._id,
       is_super_user: teacher.is_super_user
     },
