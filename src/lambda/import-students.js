@@ -4,33 +4,40 @@ import Student from '../models/Student';
 
 module.exports = async (req, res, next) => {
   const { students } = req.body;
-  const {
-    id,
-    first_name,
-    last_name,
-    name,
-    birthday,
-    address,
-    phone,
-    major,
-  } = students[0];
+  try {
+    if (!students) {
+      return next('Missing parameter: students');
+    }
+    const {
+      id,
+      first_name,
+      last_name,
+      name,
+      birthday,
+      address,
+      phone,
+      major,
+    } = students[0];
 
-  if (
-    !id ||
-    !first_name ||
-    !last_name ||
-    !name ||
-    !birthday ||
-    !address ||
-    !phone ||
-    !major
-  ) {
-    return next('Wrong parameter!');
+    if (
+      !id ||
+      !first_name ||
+      !last_name ||
+      !name ||
+      !birthday ||
+      !address ||
+      !phone ||
+      !major
+    ) {
+      return next('Wrong parameter!');
+    }
+
+    await Student.insertMany(students);
+
+    return res.json({
+      status: 'OK',
+    });
+  } catch (error) {
+    return next(error);
   }
-
-  await Student.insertMany(students);
-
-  return res.json({
-    status: 'OK',
-  });
 };
