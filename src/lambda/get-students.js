@@ -10,8 +10,6 @@ module.exports = async (req, res, next) => {
     return next('Missing parameter: class_id');
   }
 
-  console.log(class_id);
-
   const cls = await Class.findById(class_id).select(['student_ids']);
 
   if (!cls) {
@@ -22,10 +20,10 @@ module.exports = async (req, res, next) => {
 
   const students = await Student.find({
     _id: { $in: student_ids },
-  });
+  }).select(['name', 'id', 'phone', 'address']);
 
   return res.json({
     status: 'OK',
-    data: students,
+    data: { students, class_id },
   });
 };

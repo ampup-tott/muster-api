@@ -75,6 +75,8 @@ app.post(
 );
 app.get('/subjects', ensureLogged, require('./lambda/subject/get-subjects'));
 
+app.post('/story', ensureLogged, require('./lambda/story/add-story'));
+
 app.use(async (err, req, res, next) => {
   let error_code = err && err.message == 'Token is invalid' ? 4001 : undefined;
 
