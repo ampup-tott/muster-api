@@ -62,8 +62,8 @@ app.post('/class', ensureLogged, require('./lambda/class/create-class'));
 
 // Apis for Mobile
 app.get('/subjects', ensureLogged, require('./lambda/subject/get-subjects'));
-app.get('/subjects/:subject_id/classes', require('./lambda/class/get-classes'));
-app.get('/students/:id', require('./lambda/get-student'));
+app.get('/subjects/:subject_id/classes', ensureLogged, require('./lambda/class/get-classes'));
+app.get('/students/:id', ensureLogged, require('./lambda/get-student'));
 
 // subject
 app.post(

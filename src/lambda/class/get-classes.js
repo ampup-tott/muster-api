@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   const { id } = req.user_token;
   const { subject_id } = req.params;
 
-  if (isNaN(subject_id)) {
+  if (!subject_id) {
     return next('Missing or wrong parameter: subject_id');
   }
 
