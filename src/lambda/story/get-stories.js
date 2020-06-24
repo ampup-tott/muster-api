@@ -5,7 +5,7 @@ import Student from '../../models/Student';
 
 module.exports = async (req, res, next) => {
   const { class_id } = req.params;
-  const { date } = req.body;
+  const { date } = req.query;
 
   if (!class_id) {
     return next('Missing parameter: class_id');
