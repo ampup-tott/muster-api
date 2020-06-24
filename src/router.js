@@ -76,6 +76,9 @@ app.post(
 app.get('/subjects', ensureLogged, require('./lambda/subject/get-subjects'));
 
 app.post('/story', ensureLogged, require('./lambda/story/add-story'));
+app.get('/classes/:class_id/histories', ensureLogged, require('./lambda/story/get-histories'));
+app.get('/classes/:class_id/stories', ensureLogged, require('./lambda/story/get-stories'));
+app.get('/classes/:class_id/stories/students/:student_id', ensureLogged, require('./lambda/story/student-stories'));
 
 app.use(async (err, req, res, next) => {
   let error_code = err && err.message == 'Token is invalid' ? 4001 : undefined;
