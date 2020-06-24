@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
       birthday: user.birthday,
       address: user.address,
       phone: user.phone,
-      role: user.is_superuser ? 'admin' : 'user'
+      role: user.is_super_user ? 'admin' : 'user'
     }
   });
 };
