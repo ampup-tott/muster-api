@@ -17,6 +17,7 @@ module.exports = async (req, res, next) => {
         name,
         birthday,
         address,
+        email,
         phone,
         major,
       } = student;
@@ -28,6 +29,7 @@ module.exports = async (req, res, next) => {
         !name ||
         !birthday ||
         !address ||
+        !email ||
         !phone ||
         !major
       ) {

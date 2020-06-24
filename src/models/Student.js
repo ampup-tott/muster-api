@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
   name: { type: String, trim: true },
   birthday: { type: String, trim: true },
   address: { type: String, trim: true },
+  email: { type: String, trim: true },
   phone: { type: String, trim: true },
   major: { type: String, trim: true },
 });
