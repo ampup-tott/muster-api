@@ -2,6 +2,7 @@
 
 import Story from '../../models/Story';
 import Student from '../../models/Student';
+import Class from '../../models/Class';
 
 module.exports = async (req, res, next) => {
   const { class_id, student_id } = req.params;
@@ -20,6 +21,7 @@ module.exports = async (req, res, next) => {
   }
 
   const stories = await Story.find({ class_id, student_id });
+  const cls = await Class.findById(class_id);
 
   if (!stories) {
     return next('Wrong parameter: class_id');
@@ -37,6 +39,7 @@ module.exports = async (req, res, next) => {
   return res.json({
     status: 'OK',
     data: {
+      class_name: cls.name,
       profile: student,
       stories: stories,
       summary: {
