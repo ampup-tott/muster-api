@@ -44,6 +44,7 @@ module.exports = async (req, res, next) => {
     return {
       student_id: story.student_id,
       class_id: story.class_id,
+      note: story.note ? story.note : '', 
       attend: story.attend,
       date: story.date,
       name: student.name,

@@ -3,7 +3,7 @@
 import Story from '../../models/Story';
 
 module.exports = async (req, res, next) => {
-  const { class_id, students, date, note } = req.body;
+  const { class_id, students, date, notes } = req.body;
 
   if (!class_id) {
     return next('Missing parameter: class_id');
@@ -17,6 +17,10 @@ module.exports = async (req, res, next) => {
     return next('Missing paramter: date');
   }
 
+  if (!notes) {
+    return next('Missing paramter: notes');
+  }
+
   let result = [];
   for (let student in students) {
     result.push({
@@ -24,7 +28,7 @@ module.exports = async (req, res, next) => {
       date,
       student_id: student,
       attend: students[student],
-      note
+      note: notes[student]
     });
   }
 
