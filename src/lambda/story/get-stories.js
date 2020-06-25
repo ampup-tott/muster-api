@@ -19,6 +19,7 @@ module.exports = async (req, res, next) => {
     'student_id',
     'class_id',
     'date',
+    'attend'
   ]);
 
   if (!stories.length) {
@@ -42,6 +43,7 @@ module.exports = async (req, res, next) => {
     return {
       student_id: story.student_id,
       class_id: story.class_id,
+      attend: story.attend,
       date: story.date,
       name: student.name,
       id: student.id,
