@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
 
   const students = await Student.find({
     _id: { $in: student_ids },
-  }).select(['name', 'id', 'phone', 'address']);
+  }).select(['name', 'id', 'phone', 'address', 'email']);
 
   return res.json({
     status: 'OK',

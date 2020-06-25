@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
   date: { type: String, trim: true },
   attend: { type: Boolean },
   status: { type: Boolean, default: true },
+  note: { type: String, trim: true }
 });
 
 module.exports = mongoose.model('Story', schema, 'story');

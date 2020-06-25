@@ -12,6 +12,7 @@ module.exports = async (req, res, next) => {
     'address',
     'phone',
     'major',
+    'email'
   ]);
 
   res.json({
