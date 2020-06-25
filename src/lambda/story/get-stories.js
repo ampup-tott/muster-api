@@ -19,7 +19,8 @@ module.exports = async (req, res, next) => {
     'student_id',
     'class_id',
     'date',
-    'attend'
+    'attend',
+    'note'
   ]);
 
   if (!stories.length) {
