@@ -56,6 +56,7 @@ app.get('/profile', ensureLogged, require('./lambda/get-profile'));
 app.get('/all-subjects', ensureLogged, ensureAdmin, require('./lambda/subject/get-all-subjects'));
 app.get('/all-students', ensureLogged, require('./lambda/get-all-students'));
 app.get('/all-teachers', ensureLogged, require('./lambda/get-all-users'));
+app.get('/all-classes', ensureLogged, require('./lambda/class/get-all-classes'));
 
 // class
 app.post('/class', ensureLogged, require('./lambda/class/create-class'));
